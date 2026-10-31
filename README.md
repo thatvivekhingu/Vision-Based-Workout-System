@@ -50,22 +50,6 @@ The diagram below illustrates the end-to-end real-time video processing pipeline
 
 ![Video Feature – Complete Workflow](static/workflow.jpg)
 
-```mermaid
-flowchart TD
-    %% Video Streaming & Processing Pipeline
-    FrameUpdate["🖼️ Frame Update"] --> VideoInput["📹 Video Input<br/>(Streamlit WebRTC)"]
-    VideoInput --> VideoProcessor["⚙️ Video Processor Class"]
-    VideoProcessor --> Detector["👤 Detector Class /<br/>Mediapipe Model"]
-    Detector --> FrameOutput["▶️ Frame Output"]
-
-    %% Closed loop & Metric processing
-    FrameOutput --> FrameUpdate
-    FrameOutput --> Metrics["🗄️ Metrics Update /<br/>Goal Progress /<br/>DB Operations"]
-
-    %% UI Reflection
-    Metrics --> ReflectsUI["📊 Reflects to UI"]
-```
-
 #### Workflow Breakdown:
 1. **Video Ingestion Loop (`Streamlit WebRTC`)**:
    - The user's live webcam stream is captured in real time via `streamlit-webrtc` (`Video Input`).
@@ -91,14 +75,6 @@ The diagram below illustrates how workout metrics and posture evaluations trigge
 
 ![Voice Feedback Feature – Complete Workflow](static/voice-workflow.jpg)
 
-```mermaid
-flowchart LR
-    FrameOutput["▶️ Frame Output"] --> Metrics["🗄️ Metrics Update /<br/>Goal Progress /<br/>DB Operations"]
-    Metrics --> VoiceProcessor["🎙️ Voice Processor Class"]
-    VoiceProcessor --> LLM["🤖 LLM Model<br/>(Groq)"]
-    LLM --> TTS["🔊 Text-to-Speech<br/>(gTTS)"]
-    TTS --> VoiceOutput["📢 Voice Feedback Output"]
-```
 
 #### Workflow Breakdown:
 1. **Kinematic Trigger (`Frame Output` ➔ `Metrics`)**:
