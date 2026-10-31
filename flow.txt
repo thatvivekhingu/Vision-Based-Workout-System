@@ -1,0 +1,16 @@
+step 1 : pip install uv then uv --version-> ( now uv-0.12.21 )
+step 2 : create virtual environment : uv venv  -> then activate using  this -> .venv\Scripts\activate
+            o/p : (Ai-GYM_Trainer) PS C:\Ai-GYM_Trainer> 
+step 3 : requirements ->  uv pip install -r requirements.txt
+step 4 : setup .env file
+step 5 : create basic folders : mkdir core, detectors, services, static, ml_models
+step 6 : add folder inside the services  : mkdir services/auth, services/coaching, services/config, services/persistence, services/state, services/tracking, services/ui, services/vision
+step 7 : Initialize Project Folder Structure : 
+                        type nul > services\auth\__init__.py
+                        type nul > services\coaching\__init__.py
+                        type nul > services\config\__init__.py
+                        type nul > services\persistence\__init__.py
+                        type nul > services\state\__init__.py
+                        type nul > services\tracking\__init__.py
+                        type nul > services\ui\__init__.py  
+step 8 : 
