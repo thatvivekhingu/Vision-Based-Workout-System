@@ -57,11 +57,51 @@ Ai-GYM_Trainer/
 └── requirements.txt            # Project dependencies
 ```
 
-### Application Flow
+### 🔄 System Workflow & Data Pipeline
 
-The diagram below shows how video frames move through the WebRTC input, video processor, and MediaPipe detector before the processed output updates workout metrics and the interface. SQLite persistence handles workout data.
+The diagram below illustrates the end-to-end data lifecycle: from real-time webcam video streaming via Streamlit WebRTC, through the MediaPipe detector and kinematic calculations, to metric evaluations, SQLite database logging, and dynamic UI updates.
 
-![Application flow diagram](static/architecture-flow.png)
+![System Workflow Diagram](static/workflow.jpg)
+
+```mermaid
+flowchart TD
+    %% Video Streaming & Processing Pipeline
+    FrameUpdate["Frame update"] --> VideoInput["Video input<br/>Streamlit WebRTC"]
+    VideoInput --> VideoProcessor["Video Processor Class"]
+    VideoProcessor --> Detector["Detector Class /<br/>Mediapipe Model"]
+    Detector --> FrameOutput["Frame output"]
+
+    %% Closed loop & Metric processing
+    FrameOutput --> FrameUpdate
+    FrameOutput --> Metrics["Metrics update /<br/>Goal progress /<br/>DB Operations"]
+
+    %% Database & UI Reflection
+    Metrics --> SQLite["SQLite Setup"]
+    Metrics --> ReflectsUI["Reflects to ui"]
+
+    ReflectsUI --> LoginForm["Login Form UI"]
+    ReflectsUI --> SidebarUI["Sidebar UI"]
+    ReflectsUI --> StylesFonts["Add styles and fonts"]
+```
+
+#### Workflow Breakdown:
+1. **Video Ingestion Loop (`Streamlit WebRTC`)**:
+   - The user's live webcam stream is captured via `streamlit-webrtc` as incoming video frames (`Video input`).
+   - Each frame is routed to the custom `Video Processor Class`.
+2. **Pose Detection & Kinematics (`MediaPipe & OpenCV`)**:
+   - The `Detector Class` passes the frame through the Google MediaPipe Pose model to extract 33 3D body landmarks.
+   - Computes biomechanical joint angles (e.g., knee, elbow, torso, back arch) and evaluates exercise posture.
+3. **Frame Output & Feedback Loop**:
+   - Visual skeletons, angles, and feedback overlays are rendered directly onto the video frame (`Frame output`).
+   - The annotated frame is pushed back to `Frame update` for continuous, smooth WebRTC rendering.
+4. **Metrics Update & Database Persistence (`SQLite`)**:
+   - Analyzes movement states (inflection points) to increment repetition and set counts.
+   - Evaluates progress against user-configured goals.
+   - Synchronizes workout logs, session statistics, and user achievements with local SQLite storage (`SQLite Setup`).
+5. **UI Reflection (`Streamlit Frontend`)**:
+   - **Login Form UI**: Captures username and fitness goals, persisting session state across reruns.
+   - **Sidebar UI**: Provides interactive controls for workout planning, exercise selection, and real-time metric scorecards.
+   - **Styles and Fonts**: Injects custom styling (`static/style.css`) and local typography (`AdobeClean.otf`) for a modern dark-mode interface.
 
 ---
 
