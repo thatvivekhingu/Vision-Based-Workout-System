@@ -8,19 +8,6 @@
 
 An intelligent, real-time computer vision fitness trainer that monitors exercise form, tracks repetitions, calculates joint biomechanics, and delivers audio & visual feedback directly through an interactive WebRTC Streamlit interface.
 
----
-
-## 🌟 Key Features
-
-- **🎯 Real-Time Pose & Biomechanics Tracking:** Uses Google MediaPipe Pose and OpenCV for landmark detection and joint angle computations.
-- **🔄 Automated Repetition & Set Counter:** Accurately counts reps per set and overall progress based on kinematic state machines.
-- **📐 Form & Posture Feedback:** Detects bad form, hip sagging, excessive swinging, shallow depth, and back arching in real time.
-- **📹 Low-Latency WebRTC Video Streaming:** Smooth live video feed handling via `streamlit-webrtc`.
-- **🗣️ Smart Audio & AI Coaching:** Integrated text-to-speech feedback (gTTS) and LLM-powered exercise insights (Groq).
-- **🎨 Custom Modern Dark UI:** Styled with sleek glassmorphism, responsive controls, and custom typography.
-- **🔐 User Profiles & Goal Setting:** Tailor workout sessions according to fitness goals (Muscle Building, Weight Loss, Strength, General Fitness).
-
----
 
 ## 🏋️ Supported Exercises & Tracked Metrics
 
@@ -57,51 +44,44 @@ Ai-GYM_Trainer/
 └── requirements.txt            # Project dependencies
 ```
 
-### 🔄 System Workflow & Data Pipeline
+### 🎥 1. Video Feature – Complete Workflow
 
-The diagram below illustrates the end-to-end data lifecycle: from real-time webcam video streaming via Streamlit WebRTC, through the MediaPipe detector and kinematic calculations, to metric evaluations, SQLite database logging, and dynamic UI updates.
+The diagram below illustrates the end-to-end real-time video processing pipeline: from live webcam streaming via Streamlit WebRTC through MediaPipe pose estimation, metric calculation, SQLite database persistence, and UI updates.
 
-![System Workflow Diagram](static/workflow.jpg)
+![Video Feature – Complete Workflow](static/workflow.jpg)
 
 ```mermaid
 flowchart TD
     %% Video Streaming & Processing Pipeline
-    FrameUpdate["Frame update"] --> VideoInput["Video input<br/>Streamlit WebRTC"]
-    VideoInput --> VideoProcessor["Video Processor Class"]
-    VideoProcessor --> Detector["Detector Class /<br/>Mediapipe Model"]
-    Detector --> FrameOutput["Frame output"]
+    FrameUpdate["🖼️ Frame Update"] --> VideoInput["📹 Video Input<br/>(Streamlit WebRTC)"]
+    VideoInput --> VideoProcessor["⚙️ Video Processor Class"]
+    VideoProcessor --> Detector["👤 Detector Class /<br/>Mediapipe Model"]
+    Detector --> FrameOutput["▶️ Frame Output"]
 
     %% Closed loop & Metric processing
     FrameOutput --> FrameUpdate
-    FrameOutput --> Metrics["Metrics update /<br/>Goal progress /<br/>DB Operations"]
+    FrameOutput --> Metrics["🗄️ Metrics Update /<br/>Goal Progress /<br/>DB Operations"]
 
-    %% Database & UI Reflection
-    Metrics --> SQLite["SQLite Setup"]
-    Metrics --> ReflectsUI["Reflects to ui"]
-
-    ReflectsUI --> LoginForm["Login Form UI"]
-    ReflectsUI --> SidebarUI["Sidebar UI"]
-    ReflectsUI --> StylesFonts["Add styles and fonts"]
+    %% UI Reflection
+    Metrics --> ReflectsUI["📊 Reflects to UI"]
 ```
 
 #### Workflow Breakdown:
 1. **Video Ingestion Loop (`Streamlit WebRTC`)**:
-   - The user's live webcam stream is captured via `streamlit-webrtc` as incoming video frames (`Video input`).
-   - Each frame is routed to the custom `Video Processor Class`.
+   - The user's live webcam stream is captured in real time via `streamlit-webrtc` (`Video Input`).
+   - Frames are continuously passed to the custom `Video Processor Class`.
 2. **Pose Detection & Kinematics (`MediaPipe & OpenCV`)**:
-   - The `Detector Class` passes the frame through the Google MediaPipe Pose model to extract 33 3D body landmarks.
+   - The `Detector Class` passes RGB frames to the Google MediaPipe Pose model to extract 33 3D body landmarks.
    - Computes biomechanical joint angles (e.g., knee, elbow, torso, back arch) and evaluates exercise posture.
 3. **Frame Output & Feedback Loop**:
-   - Visual skeletons, angles, and feedback overlays are rendered directly onto the video frame (`Frame output`).
-   - The annotated frame is pushed back to `Frame update` for continuous, smooth WebRTC rendering.
-4. **Metrics Update & Database Persistence (`SQLite`)**:
-   - Analyzes movement states (inflection points) to increment repetition and set counts.
-   - Evaluates progress against user-configured goals.
-   - Synchronizes workout logs, session statistics, and user achievements with local SQLite storage (`SQLite Setup`).
-5. **UI Reflection (`Streamlit Frontend`)**:
-   - **Login Form UI**: Captures username and fitness goals, persisting session state across reruns.
-   - **Sidebar UI**: Provides interactive controls for workout planning, exercise selection, and real-time metric scorecards.
-   - **Styles and Fonts**: Injects custom styling (`static/style.css`) and local typography (`AdobeClean.otf`) for a modern dark-mode interface.
+   - Real-time skeletons, angles, and feedback overlays are drawn directly onto the video frame (`Frame Output`).
+   - The annotated frame is pushed to `Frame Update` for smooth WebRTC display in the browser.
+4. **Metrics Update & Database Operations (`SQLite`)**:
+   - Analyzes motion states to count repetitions and validate sets completed.
+   - Evaluates progress against user-configured workout goals.
+   - Saves session statistics and history into the local SQLite database.
+5. **Reflects to UI**:
+   - Updates live dashboard metrics, scorecards, repetition counters, and posture status in the Streamlit frontend.
 
 ---
 
