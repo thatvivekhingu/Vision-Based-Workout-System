@@ -43,31 +43,6 @@ An intelligent, real-time computer vision fitness trainer that monitors exercise
 | **Shoulder Press** | Elbow Angle, Arm Extension | Back Arching & Lockout Validation |
 | **Lunges** | Front Knee Angle, Torso Angle | Balance & Knee Over Extension |
 
----
-
-## 🏗️ Project Architecture
-
-```plaintext
-Ai-GYM_Trainer/
-├── core/                       # Core kinematics and calculation engines
-├── detectors/                  # Exercise-specific landmark detectors
-├── ml_models/                  # Trained models and pose classification weights
-├── services/                   # Modular service architecture
-│   ├── auth/                   # Authentication & login wall UI
-│   ├── coaching/               # LLM feedback & audio cue services
-│   ├── config/                 # Workout & exercise configuration schemas
-│   ├── persistence/            # Session persistence & history logging
-│   ├── state/                  # Streamlit session state management
-│   ├── tracking/               # Repetition counter & set trackers
-│   ├── ui/                     # Custom CSS & font injectors
-│   └── vision/                 # WebRTC frame processors & MediaPipe pipelines
-├── static/                     # Custom fonts (AdobeClean.otf) & stylesheet (style.css)
-├── .env.example                # Template for environment credentials
-├── .gitignore                  # Git ignore rules for virtualenvs and secrets
-├── main.py                     # Streamlit application entry point
-└── requirements.txt            # Project dependencies
-```
-
 ### 🎥 1. Video Feature – Complete Workflow
 
 The diagram below illustrates the end-to-end real-time video processing pipeline: from live webcam streaming via Streamlit WebRTC through MediaPipe pose estimation, metric calculation, SQLite database persistence, and UI updates.
