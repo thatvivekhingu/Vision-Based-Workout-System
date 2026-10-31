@@ -57,6 +57,12 @@ Ai-GYM_Trainer/
 └── requirements.txt            # Project dependencies
 ```
 
+### Application Flow
+
+The diagram below shows how video frames move through the WebRTC input, video processor, and MediaPipe detector before the processed output updates workout metrics and the interface. SQLite persistence handles workout data.
+
+![Application flow diagram](static/architecture-flow.png)
+
 ---
 
 ## 🚀 Getting Started
