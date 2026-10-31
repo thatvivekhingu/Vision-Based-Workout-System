@@ -8,6 +8,30 @@
 
 An intelligent, real-time computer vision fitness trainer that monitors exercise form, tracks repetitions, calculates joint biomechanics, and delivers audio & visual feedback directly through an interactive WebRTC Streamlit interface.
 
+---
+
+## 💡 Why This Project Matters
+
+- **Computer Vision** (body tracking)
+- **Rule-based AI** (exercise detection)
+- **Real-time processing**
+- **Voice generation**
+- **LLM-based coaching**
+
+---
+
+## ✨ Features Breakdown
+
+- **Real-time pose detection**
+- **Squat, push-up, curl tracking**
+- **Rep counting system**
+- **Form correction logic**
+- **User login + history tracking**
+- **AI-generated coaching feedback**
+- **Voice output** (like a real trainer)
+
+---
+
 
 ## 🏋️ Supported Exercises & Tracked Metrics
 
@@ -150,11 +174,14 @@ Open your browser and navigate to `http://localhost:8501`.
 
 ## 💻 Tech Stack
 
-- **Frontend & App Framework:** [Streamlit](https://streamlit.io/), [streamlit-webrtc](https://github.com/whitphx/streamlit-webrtc)
-- **Computer Vision & ML:** [MediaPipe](https://developers.google.com/mediapipe), [OpenCV](https://opencv.org/)
-- **Audio Feedback:** [gTTS](https://pypi.org/project/gTTS/)
-- **LLM Coaching:** [Groq](https://groq.com/)
-- **Styling:** Custom CSS, CSS Grid/Flexbox, Adobe Clean font
+- **Python** (main language)
+- **Streamlit** (UI)
+- **WebRTC** (camera streaming)
+- **MediaPipe** (pose detection)
+- **OpenCV** (image processing)
+- **SQLite** (database)
+- **gTTS** (voice)
+- **LLM API** (for coaching intelligence)
 
 ---
 
