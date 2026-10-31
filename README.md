@@ -10,27 +10,18 @@ An intelligent, real-time computer vision fitness trainer that monitors exercise
 
 ---
 
-## 💡 Why This Project Matters
+## 💻 Tech Stack
 
-- **Computer Vision** (body tracking)
-- **Rule-based AI** (exercise detection)
-- **Real-time processing**
-- **Voice generation**
-- **LLM-based coaching**
+- **Python** (main language)
+- **Streamlit** (UI)
+- **WebRTC** (camera streaming)
+- **MediaPipe** (pose detection)
+- **OpenCV** (image processing)
+- **SQLite** (database)
+- **gTTS** (voice)
+- **LLM API** (for coaching intelligence)
 
----
 
-## ✨ Features Breakdown
-
-- **Real-time pose detection**
-- **Squat, push-up, curl tracking**
-- **Rep counting system**
-- **Form correction logic**
-- **User login + history tracking**
-- **AI-generated coaching feedback**
-- **Voice output** (like a real trainer)
-
----
 
 
 ## 🏋️ Supported Exercises & Tracked Metrics
@@ -90,7 +81,27 @@ The diagram below illustrates how workout metrics and posture evaluations trigge
    - Delivers hands-free auditory feedback directly to the lifter in real time, keeping workouts seamless and safe.
 
 ---
+## 💡 Why This Project Matters
 
+- **Computer Vision** (body tracking)
+- **Rule-based AI** (exercise detection)
+- **Real-time processing**
+- **Voice generation**
+- **LLM-based coaching**
+
+---
+
+## ✨ Features Breakdown
+
+- **Real-time pose detection**
+- **Squat, push-up, curl tracking**
+- **Rep counting system**
+- **Form correction logic**
+- **User login + history tracking**
+- **AI-generated coaching feedback**
+- **Voice output** (like a real trainer)
+
+---
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
@@ -147,16 +158,7 @@ Open your browser and navigate to `http://localhost:8501`.
 
 ---
 
-## 💻 Tech Stack
 
-- **Python** (main language)
-- **Streamlit** (UI)
-- **WebRTC** (camera streaming)
-- **MediaPipe** (pose detection)
-- **OpenCV** (image processing)
-- **SQLite** (database)
-- **gTTS** (voice)
-- **LLM API** (for coaching intelligence)
 
 ---
 
