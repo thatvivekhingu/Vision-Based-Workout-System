@@ -85,6 +85,37 @@ flowchart TD
 
 ---
 
+### 🎙️ 2. Voice Feedback Feature – Complete Workflow
+
+The diagram below illustrates how workout metrics and posture evaluations trigger real-time AI audio coaching: from kinematic metric detection through LLM reasoning and text-to-speech synthesis.
+
+![Voice Feedback Feature – Complete Workflow](static/voice-workflow.jpg)
+
+```mermaid
+flowchart LR
+    FrameOutput["▶️ Frame Output"] --> Metrics["🗄️ Metrics Update /<br/>Goal Progress /<br/>DB Operations"]
+    Metrics --> VoiceProcessor["🎙️ Voice Processor Class"]
+    VoiceProcessor --> LLM["🤖 LLM Model<br/>(Groq)"]
+    LLM --> TTS["🔊 Text-to-Speech<br/>(gTTS)"]
+    TTS --> VoiceOutput["📢 Voice Feedback Output"]
+```
+
+#### Workflow Breakdown:
+1. **Kinematic Trigger (`Frame Output` ➔ `Metrics`)**:
+   - Landmark detections from the video pipeline evaluate joint angles, repetition transitions, and form issues (e.g., knee caving, shallow squat, excessive back arch).
+2. **Context Aggregation (`Metrics Update / Goal Progress`)**:
+   - The system tracks exercise milestones (e.g., "5 reps completed", "Set 2 finished") or detects repeated posture errors requiring guidance.
+3. **Voice Processor Class**:
+   - Debounces notifications to prevent audio spam and constructs concise situational context (exercise, set, reps, specific posture fault).
+4. **AI Coaching Intelligence (`LLM Model - Groq`)**:
+   - High-speed inference using Groq generates quick, motivational, and biomechanically accurate coaching prompts (e.g., *"Keep your chest proud and drive through your heels!"*).
+5. **Audio Synthesis (`Text-to-Speech - gTTS`)**:
+   - Converts the AI coaching text into speech audio streams on the fly.
+6. **Voice Feedback Output**:
+   - Delivers hands-free auditory feedback directly to the lifter in real time, keeping workouts seamless and safe.
+
+---
+
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
