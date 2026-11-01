@@ -1,4 +1,4 @@
-# 🏋️‍♂️ Vision-Based Workout System (AI Gym Trainer)
+# 🏋️‍♂️ Vision-Based Workout System (AI Real-Time Gym Coach)
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.54.0-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io/)
